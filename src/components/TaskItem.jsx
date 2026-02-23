@@ -42,7 +42,7 @@ export default function TaskItem({
             onChange={(event) => setUpdateDescription(event.target.value)}
           />
           <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancle}>Cancle</button>
+          <button onClick={handleCancle}>Cancel</button>
         </>
       ) : (
         <>

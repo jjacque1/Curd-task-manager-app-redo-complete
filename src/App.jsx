@@ -10,7 +10,6 @@ export default function App() {
 
     return JSON.parse(savedTasks);
   });
-
   const [filter, setFilter] = useState("all");
 
   function addTask(title, description, status) {
@@ -59,10 +58,13 @@ export default function App() {
       <br />
       <label>
         Filter:
-        <select onChange={(event) => setFilter(event.target.value)}>
+        <select
+          value={filter}
+          onChange={(event) => setFilter(event.target.value)}
+        >
           <option value="all">All</option>
           <option value="pending">Pending</option>
-          <option value="in-progress">in-progress</option>
+          <option value="in-progress">In-progress</option>
           <option value="done">Done</option>
         </select>
       </label>
