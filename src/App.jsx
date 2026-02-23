@@ -6,10 +6,12 @@ export default function App() {
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
 
-    if(!savedTasks) return [];
+    if (!savedTasks) return [];
 
     return JSON.parse(savedTasks);
   });
+
+  const [filter, setFilter] = useState("all");
 
   function addTask(title, description, status) {
     const newTask = {
@@ -48,11 +50,24 @@ export default function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const filteredTasks =
+    filter === "all" ? tasks : tasks.filter((task) => task.status === filter);
+
   return (
     <>
       <TaskForm onAddTask={addTask} />
+      <br />
+      <label>
+        Filter:
+        <select onChange={(event) => setFilter(event.target.value)}>
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="in-progress">in-progress</option>
+          <option value="done">Done</option>
+        </select>
+      </label>
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         onUpdateTaskStatus={updateTaskStatus}
         onDeleteTask={deleteTask}
         onUpdateTask={updateTask}
